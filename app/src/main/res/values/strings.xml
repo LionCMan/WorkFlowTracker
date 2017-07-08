@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Work Flow Tracker</string>
+    <string name="work">Work</string>
+    <string name="finish">Finish</string>
+    <string name="startTime">00:00:00</string>
+    <string name="back_to_work"><![CDATA[<< Back To Work]]></string>
+    <string name="takeBreak">Break</string>
+    <string name="start">Start</string>
+</resources>

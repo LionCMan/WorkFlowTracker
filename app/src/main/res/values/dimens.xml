@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="time_text_size">72sp</dimen>
+    <dimen name="padding_margin">16dp</dimen>
+    <dimen name="button_size">160dp</dimen>
+</resources>
