@@ -37,7 +37,7 @@ public class WorkActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (chronometer == null){
+                if (chronometer != null){
                     getTimeInMilis(currentTimeAtStop);
                     stopTimer();
 
@@ -48,9 +48,10 @@ public class WorkActivity extends AppCompatActivity {
                     } else if (timeStart.getText() == "Break") {
                         totalWorkTime =+ currentTimeAtStop;
                         timeStart.setText(R.string.work);
-                    } else { timeStart.setText(R.string.takeBreak); }
-                } else {
-                    /* do nothing */ } startTimer();
+                    }
+                } else if (timeStart.getText() == "Start") {
+                    timeStart.setText(R.string.takeBreak);
+                } startTimer();
             }
         });
 

@@ -13,7 +13,7 @@ public class Chronometer implements Runnable {
     private static final long MILIS_TO_HOURS = 3600000;
 
     public boolean isRunning;
-    private long mStartTime;
+    private long mStartTime = 0;
     private Context mContext;
 
     // Constructor
