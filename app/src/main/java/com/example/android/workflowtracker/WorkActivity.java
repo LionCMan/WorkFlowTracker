@@ -119,16 +119,13 @@ public class WorkActivity extends AppCompatActivity {
     }
 
     public long getTime() {
-        String time = String.valueOf(timeTextView);
-        Log.i("TEST", time);
+
+        String time = timeTextView.getText().toString().trim();
         String[] parts = time.split(":");
 
         String hour = parts[0];
-        Log.i("TEST", hour);
         String minute = parts[1];
-        Log.i("TEST", minute);
         String second = parts[2];
-        Log.i("TEST", second);
 
         long hours = Long.parseLong(hour);
         long minutes = Long.parseLong(minute);
