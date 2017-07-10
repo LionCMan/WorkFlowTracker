@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -119,11 +120,15 @@ public class WorkActivity extends AppCompatActivity {
 
     public long getTime() {
         String time = String.valueOf(timeTextView);
+        Log.i("TEST", time);
         String[] parts = time.split(":");
 
         String hour = parts[0];
+        Log.i("TEST", hour);
         String minute = parts[1];
+        Log.i("TEST", minute);
         String second = parts[2];
+        Log.i("TEST", second);
 
         long hours = Long.parseLong(hour);
         long minutes = Long.parseLong(minute);
