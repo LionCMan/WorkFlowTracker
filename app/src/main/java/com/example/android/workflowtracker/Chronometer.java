@@ -37,8 +37,6 @@ public class Chronometer implements Runnable {
         // While the clock is running count in increments of 1 millisecond
         while (isRunning){
             long currentTimeInMilis = System.currentTimeMillis() - mStartTime;
-            // Pass the value to WorkActiviy
-            ((WorkActivity)mContext).getTimeInMilis(currentTimeInMilis);
 
             // Calculation from milliseconds to seconds, minutes, and hours
             // The % symbol specifies the limit of seconds/minute/hours

@@ -22,7 +22,10 @@ public class WorkActivity extends AppCompatActivity {
     public long totalWorkTime;
     public long totalBreakTime;
 
-    Button timeStart;
+    private Button timeStart;
+
+    private static final long MILIS_TO_MINUTES = 60000;
+    private static final long MILIS_TO_HOURS = 3600000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +44,17 @@ public class WorkActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (chronometer != null){
-                    getTimeInMilis(currentTimeAtStop);
+                    currentTimeAtStop = getTime();
                     stopTimer();
                 }
-                if (timeStart.getText() == "Work"){
+                if (timeStart.getText().equals("Work")){
                     totalBreakTime =+ currentTimeAtStop;
                     timeStart.setText(R.string.takeBreak);
                     numOfBreaks++;
-                } else if (timeStart.getText() == "Break") {
+                } else if (timeStart.getText().equals("Break")) {
                     totalWorkTime =+ currentTimeAtStop;
                     timeStart.setText(R.string.work);
-                } else if (timeStart.getText() == "Start") {
+                } else if (timeStart.getText().equals("Start")) {
                     timeStart.setText(R.string.takeBreak);
                 }
                 startTimer();
@@ -64,14 +67,12 @@ public class WorkActivity extends AppCompatActivity {
 
                 if (chronometer != null){
                     // Stop the clock and get the time in milliseconds
-                    getTimeInMilis(currentTimeAtStop);
+                    getTime();
                 }
-                if (timeStart.getText() == "Work"){
+                if (timeStart.getText().equals("Work")){
                     totalBreakTime =+ currentTimeAtStop;
                     numOfBreaks++;
-                } else if (timeStart.getText() == "Break"){
-                    totalWorkTime =+ currentTimeAtStop;
-                } else if (timeStart.getText() == "Start") {
+                } else {
                     totalWorkTime =+ currentTimeAtStop;
                 }
                 stopTimer();
@@ -107,8 +108,6 @@ public class WorkActivity extends AppCompatActivity {
         chronometer = null;
     }
 
-
-
     public void updateTimerText(final String time){
         runOnUiThread(new Runnable() {
             @Override
@@ -118,8 +117,23 @@ public class WorkActivity extends AppCompatActivity {
         });
     }
 
-    public long getTimeInMilis(long currentTimeInMilis) {
-        long currentTimeAtStop = currentTimeInMilis;
+    public long getTime() {
+        String time = String.valueOf(timeTextView);
+        String[] parts = time.split(":");
+
+        String hour = parts[0];
+        String minute = parts[1];
+        String second = parts[2];
+
+        long hours = Long.parseLong(hour);
+        long minutes = Long.parseLong(minute);
+        long seconds = Long.parseLong(second);
+
+        hours = hours * MILIS_TO_HOURS;
+        minutes = minutes * MILIS_TO_MINUTES;
+        seconds = seconds * 1000;
+
+        currentTimeAtStop = hours + minutes + seconds;
         return currentTimeAtStop;
     }
 }
