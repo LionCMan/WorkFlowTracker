@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.workflowtracker.data.WorkContract;
 import com.example.android.workflowtracker.data.WorkContract.WorkEntry;
 import com.example.android.workflowtracker.data.WorkDbHelper;
 
@@ -85,7 +86,7 @@ public class ResultActivity extends AppCompatActivity {
         } db.close();
     }
 
-    private void displayDatabaseInfo() {
+    private Cursor getCursor() {
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -95,7 +96,7 @@ public class ResultActivity extends AppCompatActivity {
                 WorkEntry._ID,
                 WorkEntry.COLUMN_WF_WORK_TIME,
                 WorkEntry.COLUMN_WF_BREAK_TIME,
-                WorkEntry.COLUMN_WF_NUM_OF_BREAKS };
+                WorkEntry.COLUMN_WF_NUM_OF_BREAKS};
 
         // Perform a query on the workflow table
         Cursor cursor = db.query(
@@ -107,6 +108,13 @@ public class ResultActivity extends AppCompatActivity {
                 null,                  // Don't filter by row groups
                 null);                   // The sort order
 
+        db.close();
+        return cursor;
+    }
+
+    private void displayDatabaseInfo() {
+
+        Cursor cursor = getCursor();
         TextView displayView = (TextView) findViewById(R.id.display_results);
 
         try {
@@ -140,7 +148,6 @@ public class ResultActivity extends AppCompatActivity {
             // Always close the cursor when you're done reading from it. This releases all its
             // resources and makes it invalid.
             cursor.close();
-            db.close();
         }
     }
 
