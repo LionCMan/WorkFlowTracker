@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 public class WorkActivity extends AppCompatActivity {
 
     private TextView timeTextView;
@@ -21,13 +22,15 @@ public class WorkActivity extends AppCompatActivity {
     public long totalWorkTime;
     public long totalBreakTime;
 
+    Button timeStart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
 
         timeTextView = (TextView)findViewById(R.id.timeTV);
-        final Button timeStart = (Button) findViewById(R.id.timerStart);
+        timeStart = (Button) findViewById(R.id.timerStart);
         timeStart.setText(R.string.start);
         Button timeFinish = (Button) findViewById(R.id.timerFinish);
 
@@ -40,18 +43,18 @@ public class WorkActivity extends AppCompatActivity {
                 if (chronometer != null){
                     getTimeInMilis(currentTimeAtStop);
                     stopTimer();
-
-                    if (timeStart.getText() == "Work"){
-                        totalBreakTime =+ currentTimeAtStop;
-                        timeStart.setText(R.string.takeBreak);
-                        numOfBreaks++;
-                    } else if (timeStart.getText() == "Break") {
-                        totalWorkTime =+ currentTimeAtStop;
-                        timeStart.setText(R.string.work);
-                    }
+                }
+                if (timeStart.getText() == "Work"){
+                    totalBreakTime =+ currentTimeAtStop;
+                    timeStart.setText(R.string.takeBreak);
+                    numOfBreaks++;
+                } else if (timeStart.getText() == "Break") {
+                    totalWorkTime =+ currentTimeAtStop;
+                    timeStart.setText(R.string.work);
                 } else if (timeStart.getText() == "Start") {
                     timeStart.setText(R.string.takeBreak);
-                } startTimer();
+                }
+                startTimer();
             }
         });
 
@@ -62,15 +65,16 @@ public class WorkActivity extends AppCompatActivity {
                 if (chronometer != null){
                     // Stop the clock and get the time in milliseconds
                     getTimeInMilis(currentTimeAtStop);
-
-                    if (timeStart.getText() == "Work"){
-                        totalBreakTime =+ currentTimeAtStop;
-                        numOfBreaks++;
-                    } else if (timeStart.getText() == "Break"){
-                        totalWorkTime =+ currentTimeAtStop;
-                    }
-                    stopTimer();
                 }
+                if (timeStart.getText() == "Work"){
+                    totalBreakTime =+ currentTimeAtStop;
+                    numOfBreaks++;
+                } else if (timeStart.getText() == "Break"){
+                    totalWorkTime =+ currentTimeAtStop;
+                } else if (timeStart.getText() == "Start") {
+                    totalWorkTime =+ currentTimeAtStop;
+                }
+                stopTimer();
 
                 String totalBreak = String.valueOf(totalBreakTime);
                 String totalWork = String.valueOf(totalWorkTime);

@@ -150,7 +150,6 @@ public class ResultActivity extends AppCompatActivity {
         displayDatabaseInfo();
     }
 
-    @SuppressLint("DefaultLocale")
     private void convertTime(){
         long timeW = mWork;
         // Calculation from milliseconds to seconds, minutes, and hours

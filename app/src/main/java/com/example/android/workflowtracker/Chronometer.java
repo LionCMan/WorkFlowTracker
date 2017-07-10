@@ -1,7 +1,8 @@
 package com.example.android.workflowtracker;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+
+import java.util.Locale;
 
 /**
  * Created by Cian on 07/07/2017.
@@ -13,7 +14,7 @@ public class Chronometer implements Runnable {
     private static final long MILIS_TO_HOURS = 3600000;
 
     public boolean isRunning;
-    private long mStartTime = 0;
+    private long mStartTime;
     private Context mContext;
 
     // Constructor
@@ -22,6 +23,7 @@ public class Chronometer implements Runnable {
     }
 
     public boolean start(){
+        mStartTime = System.currentTimeMillis();
         return isRunning = true;
     }
 
@@ -29,15 +31,8 @@ public class Chronometer implements Runnable {
         return isRunning = false;
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     public void run() {
-
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // While the clock is running count in increments of 1 millisecond
         while (isRunning){
@@ -52,7 +47,7 @@ public class Chronometer implements Runnable {
             int hours = (int) ((currentTimeInMilis / (MILIS_TO_HOURS)) % 24);
 
             // Format time to HH:MM:SS
-            ((WorkActivity)mContext).updateTimerText(String.format(
+            ((WorkActivity)mContext).updateTimerText(String.format(Locale.getDefault(),
                     "%02d:%02d:%02d", hours, minutes, seconds
             ));
         }
